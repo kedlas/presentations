@@ -1,0 +1,4 @@
+###
+GET {{host}}/order
+Accept: application/json
+Content-Type: text/plain
