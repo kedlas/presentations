@@ -1,0 +1,31 @@
+{
+  "name": "2017-rabbitmq-prednaska",
+  "version": "1.0.0",
+  "description": "2017 brezen, symfony sraz HK - rabbitMQ prednaska podklady",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kedlas/2017-rabbitmq-prednaska.git"
+  },
+  "keywords": [
+    "symfony",
+    "sraz",
+    "prednaska",
+    "rabbitmq"
+  ],
+  "author": "Tomas Sedlacek, kedlas.cz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kedlas/2017-rabbitmq-prednaska/issues"
+  },
+  "homepage": "https://github.com/kedlas/2017-rabbitmq-prednaska#readme",
+  "dependencies": {
+    "amqplib": "^0.5.1",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "uuid": "^3.0.1"
+  }
+}
