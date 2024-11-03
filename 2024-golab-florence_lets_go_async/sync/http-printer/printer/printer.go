@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
+	"time"
 )
 
 func main() {
@@ -14,15 +15,16 @@ func main() {
 func handlePrint(w http.ResponseWriter, req *http.Request) {
 	fmt.Println("print request received")
 	details := parseRequest(req)
-	generated := generateInvoice(details)
+	inv := printInvoice(details)
 	fmt.Println("invoice generated")
 
-	_, _ = fmt.Fprint(w, generated)
+	_, _ = fmt.Fprint(w, inv)
 }
 func parseRequest(_ *http.Request) orderDetails {
 	return orderDetails{}
 }
-func generateInvoice(_ orderDetails) invoice {
+func printInvoice(_ orderDetails) invoice {
+	printMemUsage()
 	memLeak()
 	printMemUsage()
 	return invoice{}
@@ -31,8 +33,10 @@ func generateInvoice(_ orderDetails) invoice {
 func memLeak() {
 	for i := 0; i < 1000000; i++ {
 		memGarbage := make([]byte, 0)
-		memGarbage = append(memGarbage, []byte("Hello there, I am leaking.")...)
+		memGarbage = append(memGarbage, []byte("Hello there Gophers, I am leaking a lot of memory here...")...)
 	}
+	time.Sleep(2 * time.Second)
+	runtime.GC()
 }
 
 func printMemUsage() {

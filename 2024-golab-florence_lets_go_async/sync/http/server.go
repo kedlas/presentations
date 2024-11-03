@@ -6,30 +6,35 @@ import (
 	"time"
 )
 
+type orderDetails struct{}
+type invoice struct{}
+
 func main() {
 	http.HandleFunc("/order", handleOrder)
-	_ = http.ListenAndServe(":8090", nil)
+	fmt.Println("Server listening on port 8090")
+	err := http.ListenAndServe(":8090", nil)
+	if err != nil {
+		panic(err)
+	}
 }
 func handleOrder(w http.ResponseWriter, _ *http.Request) {
-	details := getOrderDetails()
-	generateInvoice(details)
-	handover(details)
+	fmt.Println("Order processing started")
 
+	details := getOrderDetails()
+	generatedInvoice := generateInvoice(details)
+	handover(details, generatedInvoice)
+
+	fmt.Println("Order processed")
 	_, _ = fmt.Fprint(w, "Order processed")
 }
 func getOrderDetails() orderDetails {
-	time.Sleep(1 * time.Second)
-
+	time.Sleep(100 * time.Millisecond)
 	return orderDetails{}
-}
-func handover(_ orderDetails) {
-	time.Sleep(1 * time.Second)
 }
 func generateInvoice(_ orderDetails) invoice {
 	time.Sleep(5 * time.Second)
-
 	return invoice{}
 }
-
-type orderDetails struct{}
-type invoice struct{}
+func handover(_ orderDetails, _ invoice) {
+	time.Sleep(200 * time.Millisecond)
+}

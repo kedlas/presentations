@@ -4,7 +4,7 @@ build:
 	docker build -t go-http-demo .
 
 run:
-	docker run -p 8090:8090 -e GOGC=off --memory=128m  go-http-demo
+	docker rm -f go-http-demo || true; docker run -p 8090:8090 --memory=128m --name go-http-demo go-http-demo
 
 create-order:
 	curl --location --request POST 'http://localhost:8090/order'
