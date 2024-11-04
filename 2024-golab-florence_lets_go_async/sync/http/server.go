@@ -21,8 +21,8 @@ func handleOrder(w http.ResponseWriter, _ *http.Request) {
 	fmt.Println("Order processing started")
 
 	details := getOrderDetails()
-	generatedInvoice := generateInvoice(details)
-	handover(details, generatedInvoice)
+	inv := createInvoice(details)
+	handover(details, inv)
 
 	fmt.Println("Order processed")
 	_, _ = fmt.Fprint(w, "Order processed")
@@ -31,7 +31,7 @@ func getOrderDetails() orderDetails {
 	time.Sleep(100 * time.Millisecond)
 	return orderDetails{}
 }
-func generateInvoice(_ orderDetails) invoice {
+func createInvoice(_ orderDetails) invoice {
 	time.Sleep(5 * time.Second)
 	return invoice{}
 }
