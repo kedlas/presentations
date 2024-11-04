@@ -22,13 +22,13 @@ func handleOrder(w http.ResponseWriter, _ *http.Request) {
 	fmt.Println("Order processing started")
 
 	details := getOrderDetails()
-	err, generatedInvoice := generateInvoice(details)
+	err, inv := createInvoice(details)
 	if err != nil {
 		fmt.Println("Failed to generate invoice")
 		_, _ = fmt.Fprint(w, "Order process failed: failed to generate invoice")
 		return
 	}
-	handover(details, generatedInvoice)
+	handover(details, inv)
 
 	fmt.Println("Order processed")
 	_, _ = fmt.Fprint(w, "Order processed")
@@ -36,7 +36,7 @@ func handleOrder(w http.ResponseWriter, _ *http.Request) {
 func getOrderDetails() orderDetails {
 	return orderDetails{}
 }
-func generateInvoice(details orderDetails) (error, invoice) {
+func createInvoice(details orderDetails) (error, invoice) {
 	reqBodyBytes := new(bytes.Buffer)
 	_ = json.NewEncoder(reqBodyBytes).Encode(details)
 
