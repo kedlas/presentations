@@ -4,7 +4,7 @@ build:
 	docker build -t go-pgq-server-demo .
 
 run:
-	docker rm -f pgq-server; docker run -p 8090:8090 -e GOGC=off --memory=128m --network host --name pgq-server go-pgq-server-demo
+	docker rm -f pgq-server; docker run -p 8090:8090 --network host --name pgq-server go-pgq-server-demo
 
 create-order:
 	curl --location --request POST 'http://localhost:8090/order'
